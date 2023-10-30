@@ -1,22 +1,22 @@
 import aiohttp
+from models import Community
+from typing import List
+from . import AsyncRequests
 
-class RaspisanieAPI:
-    
-    def __init__(self, communityPrefix) -> None:
-        self.host = '127.0.0.1:8000'
+class RaspisanieAPI(AsyncRequests):
+
+    def __init__(self, communityPrefix:str) -> None:
+        self.host = 'http://127.0.0.1:8456'
         self.communityPrefix = communityPrefix
 
-    async def getCommunity(self):
+    async def getCommunity(self) -> List[Community]:
         url = self.host + self.communityPrefix
-        print(url)
-        pass
+        return (await self._get(url))['data']
 
     async def getSchedule(self, id):
         url = self.host + '/schedule' + self.communityPrefix + f'/{id}'
-        print(url)
-        pass
+        return await self._get(url)
 
     async def getExam(self, id):
         url = self.host + '/schedule' + self.communityPrefix + f'/{id}'
-        print(url)
-        pass
+        return await self._get(url)
