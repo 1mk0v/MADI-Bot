@@ -29,7 +29,6 @@ async def handlerOfAnythink(message: Message) -> None:
 
 
 async def main() -> None:
-    session = AiohttpSession('http://proxy.sirena-travel.ru:3128')
     bot = Bot(TOKEN, parse_mode=ParseMode.HTML, session=session)
     dp.include_router(authRouter)
     await dp.start_polling(bot)
